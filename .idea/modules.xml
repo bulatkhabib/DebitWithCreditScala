@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DebitWithCreditScala.iml" filepath="$PROJECT_DIR$/.idea/DebitWithCreditScala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/worker.iml" filepath="$PROJECT_DIR$/.idea/modules/worker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/worker-root.iml" filepath="$PROJECT_DIR$/.idea/modules/worker-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/worker-root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/worker-root-build.iml" />
     </modules>
   </component>
 </project>
