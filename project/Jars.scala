@@ -63,4 +63,13 @@ object Jars {
     val enumeratum = "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % version
     val swagger = "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % version
   }
+
+  object doobie {
+    val version = "1.0.0-RC2"
+
+    val core = "org.tpolecat" %% "doobie-core" % version
+    val postgres = "org.tpolecat" %% "doobie-postgres" % version
+    val postgresCirce = "org.tpolecat" %% "doobie-postgres-circe" % version
+    val hikari = "org.tpolecat" %% "doobie-hikari" % version
+  }
 }

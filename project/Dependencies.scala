@@ -23,7 +23,11 @@ object Dependencies {
         tapir.core,
         tapir.tethys,
         tapir.http4s,
-        tapir.sttpClient
+        tapir.sttpClient,
+        doobie.core,
+        doobie.hikari,
+        doobie.postgres,
+        doobie.postgresCirce
       )
 
     protected def testDependencies: Vector[ModuleID] = Vector.empty

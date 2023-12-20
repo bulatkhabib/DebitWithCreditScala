@@ -10,6 +10,7 @@ import utils.kafka.{KafkaBatchConf, KafkaConsumerConf}
 final case class AppConf(
     shutdown: ShutdownConf,
     loanOrderReader: KafkaConsumerConf,
+    database: DatabaseConf
 )
 
 object AppConf {
@@ -17,4 +18,6 @@ object AppConf {
 
   implicit val kafkaConsumerConfReader: ConfigReader[KafkaConsumerConf] = pureconfig.generic.semiauto.deriveReader
   implicit val kafkaBatchConfReader: ConfigReader[KafkaBatchConf]       = pureconfig.generic.semiauto.deriveReader
+  implicit val databaseConfReader: ConfigReader[DatabaseConf]           = pureconfig.generic.semiauto.deriveReader
+  implicit val hikariPoolConfReader: ConfigReader[HikariPoolConf]       = pureconfig.generic.semiauto.deriveReader
 }
