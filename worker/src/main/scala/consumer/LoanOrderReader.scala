@@ -6,7 +6,8 @@ import cats.data.NonEmptyVector
 import consumer.Domain.Consumer
 import fs2.kafka.ConsumerRecord
 import tofu.Handle
-import utils.kafka.HandleResult
+import tofu.syntax.handle._
+import utils.kafka.{EventsHandler, HandleResult}
 
 class LoanOrderReader[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error]](
     parser: LoanOrderReaderParser[F],

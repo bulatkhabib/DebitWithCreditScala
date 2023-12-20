@@ -8,6 +8,7 @@ import cats.syntax.functor._
 import fs2.kafka.{CommittableOffsetBatch, ConsumerSettings, KafkaConsumer}
 import tofu.syntax.handle._
 import tofu.time.Timeout
+
 object Consumer {
 
   def make[F[_]: Async: Timeout](
@@ -31,10 +32,9 @@ object Consumer {
       config: KafkaConsumerConf,
       handler: ConsumerHandler[F],
       shutdownHandler: ShutdownHandler[F]
-  )(implicit monitoring: ConsumerMonitoring[F]): F[Unit] =
+  ): F[Unit] =
     KafkaConsumer.resource(settings).use { consumer =>
       for {
-        _ <- monitoring.start(consumer)
         _ <- consumer.subscribeTo(config.topic)
         _ <- consumer.records.groupWithin(config.batch.maxSize, config.batch.maxTimeWindow)
           .parEvalMap(config.parallelism) {

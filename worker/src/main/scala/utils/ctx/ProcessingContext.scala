@@ -9,6 +9,7 @@ import fs2.kafka.{Header, HeaderDeserializer, Headers}
 import io.estatico.newtype.macros.newtype
 import sttp.tapir.SchemaType.SString
 import sttp.tapir.{Codec, CodecFormat, Schema}
+import tethys.{JsonReader, JsonWriter}
 import tofu.generate.GenUUID
 import tofu.logging.derivation.loggable
 import utils.ctx.ProcessingContext.XTraceId
@@ -73,4 +74,7 @@ object ProcessingContext {
     implicit val tapirSchema: Schema[TraceId] =
       Schema(SString[TraceId]()).description("Идентификатор запроса")
   }
+
+  implicit lazy val uuidReader: JsonReader[UUID] = JsonReader.stringReader.map(UUID.fromString)
+  implicit lazy val uuidWriter: JsonWriter[UUID] = JsonWriter.stringWriter.contramap(_.toString)
 }

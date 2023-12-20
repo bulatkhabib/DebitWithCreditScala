@@ -13,7 +13,7 @@ import tofu.syntax.lift._
 import tofu.syntax.monoid._
 import utils.ctx.ProcessingContext
 import utils.hooks.{ShutdownHook, StartupHook}
-import utils.kafka.{Consumer, EventsObserver, ShutdownHandler}
+import utils.kafka.{Consumer, ConsumerHandler, EventsHandler, EventsObserver, ShutdownHandler}
 
 class RunComponent[I[_]: Concurrent](
     val workers: List[Resource[I, Unit]],
@@ -44,7 +44,9 @@ object RunComponent {
       (EventsHandler.logs[LoanOrderReader.Error, F] |+| EventsHandler.observer[LoanOrderReader.Error, F](
         eventsObserverLoanOrderReader
       ))
-        .attach(services.loanOrderReader.eventsHandler)
+        .attach(services.loanOrderReader.eventsHandler).withCtx[I, ProcessingContext](
+          ProcessingContext.create[I](None)
+        )
 
     Deferred[I, Either[Throwable, Unit]].map { stopSignal =>
       val startupHook: StartupHook[I] =
@@ -52,7 +54,7 @@ object RunComponent {
           stopSignal.get.rethrow.lift,
           probeControl,
           shutdownHook
-        ).mapK()
+        ).mapK(setupContext.setupK)
 
       new RunComponent[I](
         List(
