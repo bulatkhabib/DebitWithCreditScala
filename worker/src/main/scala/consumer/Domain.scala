@@ -1,6 +1,8 @@
 package consumer
 
 import cats.syntax.semigroup._
+import derevo.derive
+import derevo.tethys.{tethysReader, tethysWriter}
 import tofu.logging.{DictLoggable, LogRenderer, Loggable}
 import tofu.{Errors => TofuErrors}
 
@@ -72,6 +74,23 @@ object Domain {
               level = Consumer.Error.Level.Business
             )
         }
+      }
+
+      sealed trait LoanOrderReaderEvent
+
+      object LoanOrderReaderEvent {
+        @derive(tethysReader, tethysWriter)
+        final case class V1(
+            id: Int,
+            userId: Int,
+            term: Int,
+            children: Int,
+            amount: BigDecimal,
+            averageMoney: BigDecimal,
+            workPeriod: Int,
+            lastWorkPeriod: Int,
+            birthDate: String
+        )
       }
     }
   }
