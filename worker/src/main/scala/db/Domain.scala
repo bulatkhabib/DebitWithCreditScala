@@ -9,6 +9,7 @@ import tethys.enumeratum.StringTethysEnum
 object Domain {
   final case class LoanEntry(
       loanId: LoanEntry.LoanId,
+      status: LoanStatus,
       userId: LoanEntry.LoanUserId,
       term: LoanEntry.Term,
       amount: LoanEntry.Amount,

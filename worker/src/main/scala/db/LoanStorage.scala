@@ -23,12 +23,14 @@ object LoanStorage {
       sql"""
             INSERT INTO loan_table(
                 loan_id,
+                status,
                 user_id,
                 term,
                 amount,
                 averageMoney
             ) VALUES (
                 ${loan.loanId.id},
+                ${loan.status}
                 ${loan.userId.id},
                 ${loan.term.term},
                 ${loan.amount.amount},
