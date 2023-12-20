@@ -5,7 +5,7 @@ import sttp.tapir.server.http4s.Http4sServerOptions
 import tofu.{Execute, WithRun}
 import utils.ctx.ProcessingContext
 import utils.hooks.StartupHook
-import wiring.{CoreComponent, RunComponent}
+import wiring.{CoreComponent, DatabaseComponent, RunComponent}
 
 object Application {
 
@@ -14,6 +14,7 @@ object Application {
   ): Resource[I, StartupHook[I]] = {
     for {
       core: CoreComponent[I, F] <- Resource.eval(CoreComponent.make[I, F])
+      database: DatabaseComponent[F] <- DatabaseComponent.make[I, F](core)
       services: ServiceComponent[F] <-
         Resource.eval(ServiceComponent.make[I, F](core, database))
       run: RunComponent[I] <-
