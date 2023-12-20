@@ -8,7 +8,6 @@ import io.estatico.newtype.macros.newtype
 object Domain {
   final case class LoanData(
       loanId: LoanData.LoanId,
-      status: LoanStatus,
       userId: LoanData.LoanUserId,
       term: LoanData.Term,
       amount: LoanData.Amount,

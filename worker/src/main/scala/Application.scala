@@ -16,7 +16,7 @@ object Application {
       core: CoreComponent[I, F] <- Resource.eval(CoreComponent.make[I, F])
       database: DatabaseComponent[F] <- DatabaseComponent.make[I, F](core)
       services: ServiceComponent[F] <-
-        Resource.eval(ServiceComponent.make[I, F](database))
+        Resource.eval(ServiceComponent.make[I, F](core, database))
       run: RunComponent[I] <-
         Resource.eval(RunComponent.make[I, F](core, services))
       hook: StartupHook[I] <- run.resource
