@@ -5,7 +5,7 @@ import cats.Monad
 import cats.data.NonEmptyVector
 import consumer.Domain.Consumer
 import fs2.kafka.ConsumerRecord
-import services.OrderProcessingService
+import services.{LoanOrderReaderParser, OrderProcessingService}
 import tofu.Handle
 import tofu.syntax.handle._
 import utils.kafka.{EventsHandler, HandleResult}
