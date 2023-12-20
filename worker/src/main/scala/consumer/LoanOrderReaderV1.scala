@@ -5,13 +5,14 @@ import cats.Monad
 import cats.data.NonEmptyVector
 import consumer.Domain.Consumer
 import fs2.kafka.ConsumerRecord
+import services.OrderProcessingService
 import tofu.Handle
 import tofu.syntax.handle._
 import utils.kafka.{EventsHandler, HandleResult}
 
-class LoanOrderReader[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error]](
+class LoanOrderReaderV1[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error]](
     parser: LoanOrderReaderParser[F],
-    service: LoanOrderReaderService[F]
+    service: OrderProcessingService[F]
 ) extends EventsHandler[Consumer.LoanOrderReader.Error, F] {
   override def handleBatch(
       records: NonEmptyVector[ConsumerRecord[Option[String], Option[String]]]
