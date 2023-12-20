@@ -27,7 +27,10 @@ object Dependencies {
         doobie.core,
         doobie.hikari,
         doobie.postgres,
-        doobie.postgresCirce
+        doobie.postgresCirce,
+        enumeratum.core,
+        enumeratum.doobie,
+        enumeratum.circe
       )
 
     protected def testDependencies: Vector[ModuleID] = Vector.empty
