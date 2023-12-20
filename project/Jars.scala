@@ -2,28 +2,28 @@ import sbt.librarymanagement.syntax._
 
 object Jars {
   object cats {
-    val coreVersion = "2.8.0"
+    val coreVersion   = "2.8.0"
     val effectVersion = "3.5.2"
 
-    val core = "org.typelevel" %% "cats-core" % coreVersion
+    val core   = "org.typelevel" %% "cats-core"   % coreVersion
     val effect = "org.typelevel" %% "cats-effect" % effectVersion
   }
 
   object tofu {
     val version = "0.12.0.1"
 
-    val all = "tf.tofu" %% "tofu" % version
-    val core = "tf.tofu" %% "tofu-core-ce3" % version
-    val logging = "tf.tofu" %% "tofu-logging-layout" % version
+    val all        = "tf.tofu" %% "tofu"                    % version
+    val core       = "tf.tofu" %% "tofu-core-ce3"           % version
+    val logging    = "tf.tofu" %% "tofu-logging-layout"     % version
     val derivation = "tf.tofu" %% "tofu-logging-derivation" % version
   }
 
   object derevo {
     val version = "0.13.0"
 
-    val catsTagless = "tf.tofu" %% "derevo-cats-tagless" % version
-    val derevoConfig = "tf.tofu" %% "derevo-pureconfig" % version
-    val tethys = "tf.tofu" %% "derevo-tethys" % version
+    val catsTagless    = "tf.tofu" %% "derevo-cats-tagless"    % version
+    val derevoConfig   = "tf.tofu" %% "derevo-pureconfig"      % version
+    val tethys         = "tf.tofu" %% "derevo-tethys"          % version
     val tethysMagnolia = "tf.tofu" %% "derevo-tethys-magnolia" % version
   }
 
@@ -56,20 +56,28 @@ object Jars {
   object tapir {
     val version = "1.1.3"
 
-    val core = "com.softwaremill.sttp.tapir" %% "tapir-core" % version
-    val sttpClient = "com.softwaremill.sttp.tapir" %% "tapir-sttp-client" % version
-    val tethys = "com.softwaremill.sttp.tapir" %% "tapir-json-tethys" % version
-    val http4s = "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % version
-    val enumeratum = "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % version
-    val swagger = "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % version
+    val core       = "com.softwaremill.sttp.tapir" %% "tapir-core"              % version
+    val sttpClient = "com.softwaremill.sttp.tapir" %% "tapir-sttp-client"       % version
+    val tethys     = "com.softwaremill.sttp.tapir" %% "tapir-json-tethys"       % version
+    val http4s     = "com.softwaremill.sttp.tapir" %% "tapir-http4s-server"     % version
+    val enumeratum = "com.softwaremill.sttp.tapir" %% "tapir-enumeratum"        % version
+    val swagger    = "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % version
   }
 
   object doobie {
     val version = "1.0.0-RC2"
 
-    val core = "org.tpolecat" %% "doobie-core" % version
-    val postgres = "org.tpolecat" %% "doobie-postgres" % version
+    val core          = "org.tpolecat" %% "doobie-core"           % version
+    val postgres      = "org.tpolecat" %% "doobie-postgres"       % version
     val postgresCirce = "org.tpolecat" %% "doobie-postgres-circe" % version
-    val hikari = "org.tpolecat" %% "doobie-hikari" % version
+    val hikari        = "org.tpolecat" %% "doobie-hikari"         % version
+  }
+
+  object enumeratum {
+    val version = "1.7.0"
+
+    val core   = "com.beachape" %% "enumeratum"        % version
+    val circe  = "com.beachape" %% "enumeratum-circe"  % version
+    val doobie = "com.beachape" %% "enumeratum-doobie" % "1.7.1"
   }
 }
