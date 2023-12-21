@@ -12,6 +12,7 @@ import scala.concurrent.duration.DurationInt
 
 trait OrderProcessingService[F[_]] {
   def processOrder(loan: LoanData): F[Boolean]
+  def createOrder(loan: LoanData): F[Boolean]
 }
 
 object OrderProcessingService {
@@ -27,6 +28,18 @@ object OrderProcessingService {
           LoanEntry.LoanId(loan.loanId.id),
           LoanStatus.Declined
         )
+
+    override def createOrder(loan: LoanData): F[Boolean] =
+      loanStorage.create(
+        LoanEntry(
+          loanId = LoanEntry.LoanId(loan.loanId.id),
+          status = LoanStatus.Pending,
+          userId = LoanEntry.LoanUserId(loan.userId.id),
+          term = LoanEntry.Term(loan.term.term),
+          amount = LoanEntry.Amount(loan.amount.amount),
+          averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+        )
+      )
   }
 
   def make[F[_]: Monad: Sleep](loanStorage: LoanStorage[F]): OrderProcessingService[F] =

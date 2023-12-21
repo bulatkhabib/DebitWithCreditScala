@@ -27,7 +27,7 @@ object CoreComponent {
     for {
       implicit0(conf: AppConf) <- AppConf.load[I]
       implicit0(logMakeI: Logging.Make[I]) = Logging.Make.plain[I]
-      implicit0(logMakeF: Logging.Make[F]) = Logging.Make.plain[F]
+      implicit0(logMakeF: Logging.Make[F]) = Logging.Make.contextual[F, ProcessingContext]
       implicit0(probeControl: ProbeControl[F]) <- ProbeControl.make[I, F]
       implicit0(shutdownHook: ShutdownHook[F]) = ShutdownHook.default[F](conf.shutdown.gracePeriod, probeControl)
       implicit0(setupContext: SetupContext[I, F]) =
