@@ -3,9 +3,11 @@ package consumer
 import cats.syntax.semigroup._
 import derevo.derive
 import derevo.tethys.{tethysReader, tethysWriter}
+import tethys.{JsonReader, JsonWriter}
 import tofu.logging.{DictLoggable, LogRenderer, Loggable}
 import tofu.{Errors => TofuErrors}
 
+import java.util.UUID
 import scala.util.control.NoStackTrace
 
 object Domain {
@@ -82,7 +84,7 @@ object Domain {
         @derive(tethysReader, tethysWriter)
         final case class V1(
             id: Int,
-            userId: Int,
+            userId: UUID,
             term: Int,
             children: Int,
             amount: BigDecimal,
@@ -92,6 +94,9 @@ object Domain {
             birthDate: String
         )
       }
+
+      implicit lazy val uuidReader: JsonReader[UUID] = JsonReader.stringReader.map(UUID.fromString)
+      implicit lazy val uuidWriter: JsonWriter[UUID] = JsonWriter.stringWriter.contramap(_.toString)
     }
   }
 }

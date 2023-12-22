@@ -28,7 +28,7 @@ class LoanOrderReaderV1[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error
 
       loadEvents = events.map { event =>
         LoanData(
-          loanId = LoanData.LoanId(event.id),
+          id = LoanData.LoanId(event.id),
           userId = LoanData.LoanUserId(event.userId),
           term = LoanData.Term(event.term),
           amount = LoanData.Amount(event.amount),

@@ -14,7 +14,7 @@ import doobie.ConnectionIO
 trait LoanStorage[F[_]] {
   def create(loan: LoanEntry): F[Boolean]
 
-  def updateStatus(id: LoanEntry.LoanId, status: LoanStatus): F[Boolean]
+  def updateStatus(loan: LoanEntry, status: LoanStatus): F[Boolean]
 }
 
 object LoanStorage {
@@ -22,7 +22,7 @@ object LoanStorage {
     override def create(loan: LoanEntry): ConnectionIO[Boolean] =
       sql"""
             INSERT INTO loan_table(
-                loan_id,
+                id,
                 status,
                 user_id,
                 term,
@@ -39,14 +39,16 @@ object LoanStorage {
          """
         .update.run.map(_ > 0)
 
-    override def updateStatus(id: LoanEntry.LoanId, status: LoanStatus): ConnectionIO[Boolean] =
+    override def updateStatus(loan: LoanEntry, status: LoanStatus): ConnectionIO[Boolean] =
       sql"""
         UPDATE
           loan_table
         SET
           status = $status
         WHERE
-          loan_id = ${id.id}
+          id = ${loan.loanId.id}
+          AND
+          user_id = ${loan.userId.id}
       """.update.run.map(_ > 0)
   }
 

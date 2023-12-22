@@ -20,19 +20,33 @@ object OrderProcessingService {
     override def processOrder(loan: LoanData): F[Boolean] =
       if (loan.workPeriod > 2 && loan.lastWorkPeriod >= 1)
         Sleep[F].sleep(100.milliseconds) >> loanStorage.updateStatus(
-          LoanEntry.LoanId(loan.loanId.id),
+          LoanEntry(
+            loanId = LoanEntry.LoanId(loan.id.id),
+            status = LoanStatus.Approved,
+            userId = LoanEntry.LoanUserId(loan.userId.id),
+            term = LoanEntry.Term(loan.term.term),
+            amount = LoanEntry.Amount(loan.amount.amount),
+            averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+          ),
           LoanStatus.Approved
         )
       else
         Sleep[F].sleep(100.milliseconds) >> loanStorage.updateStatus(
-          LoanEntry.LoanId(loan.loanId.id),
+          LoanEntry(
+            loanId = LoanEntry.LoanId(loan.id.id),
+            status = LoanStatus.Declined,
+            userId = LoanEntry.LoanUserId(loan.userId.id),
+            term = LoanEntry.Term(loan.term.term),
+            amount = LoanEntry.Amount(loan.amount.amount),
+            averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+          ),
           LoanStatus.Declined
         )
 
     override def createOrder(loan: LoanData): F[Boolean] =
       loanStorage.create(
         LoanEntry(
-          loanId = LoanEntry.LoanId(loan.loanId.id),
+          loanId = LoanEntry.LoanId(loan.id.id),
           status = LoanStatus.Pending,
           userId = LoanEntry.LoanUserId(loan.userId.id),
           term = LoanEntry.Term(loan.term.term),

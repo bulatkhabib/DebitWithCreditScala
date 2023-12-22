@@ -33,7 +33,10 @@ object Dependencies {
         enumeratum.circe
       )
 
-    protected def testDependencies: Vector[ModuleID] = Vector.empty
+    protected def testDependencies: Vector[ModuleID] =
+      Vector(
+        testing.`scala-test`
+      )
 
     def overridingDependencies: Vector[ModuleID] = Vector.empty
 

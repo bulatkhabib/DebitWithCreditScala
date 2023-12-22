@@ -80,4 +80,9 @@ object Jars {
     val circe  = "com.beachape" %% "enumeratum-circe"  % version
     val doobie = "com.beachape" %% "enumeratum-doobie" % "1.7.1"
   }
+
+  object testing {
+
+    val `scala-test` = "org.scalatest" %% "scalatest" % "3.2.11"
+  }
 }
