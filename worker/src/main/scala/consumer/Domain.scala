@@ -83,14 +83,14 @@ object Domain {
       object LoanOrderReaderEvent {
         @derive(tethysReader, tethysWriter)
         final case class V1(
-            id: Int,
+            id: UUID,
             userId: UUID,
             term: Int,
-            children: Int,
-            amount: BigDecimal,
-            averageMoney: BigDecimal,
+            children: String,
+            amount: String,
+            averageMoney: Int,
             workPeriod: Int,
-            lastWorkPeriod: Int,
+            lastWorkPeriod: String,
             birthDate: String
         )
       }

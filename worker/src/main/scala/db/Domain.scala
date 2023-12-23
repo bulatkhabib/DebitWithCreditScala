@@ -21,7 +21,7 @@ object Domain {
 
   object LoanEntry {
     @derive(tethysReader, tethysWriter)
-    @newtype case class LoanId(id: Int)
+    @newtype case class LoanId(id: UUID)
 
     @derive(tethysReader, tethysWriter)
     @newtype case class LoanUserId(id: UUID)
@@ -30,10 +30,10 @@ object Domain {
     @newtype case class Term(term: Int)
 
     @derive(tethysReader, tethysWriter)
-    @newtype case class Amount(amount: BigDecimal)
+    @newtype case class Amount(amount: String)
 
     @derive(tethysReader, tethysWriter)
-    @newtype case class AverageMoney(averageMoney: BigDecimal)
+    @newtype case class AverageMoney(averageMoney: Int)
   }
 
   sealed abstract class LoanStatus(

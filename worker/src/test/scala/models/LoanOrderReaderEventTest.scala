@@ -14,28 +14,28 @@ class LoanOrderReaderEventTest extends AnyFlatSpec with Matchers {
     val jsonString =
       s"""
         {
-           | "id" : 1,
+           | "id" : "89a6171a-0521-4cdc-bbe7-08706973f944",
            | "userId": "89a6171a-0521-4cdc-bbe7-08706973f944",
            | "term": 20,
-           | "children": 2,
-           | "amount": 100000.0,
-           | "averageMoney": 100000.0,
+           | "children": "2",
+           | "amount": "100000",
+           | "averageMoney": 100000,
            | "workPeriod": 5,
-           | "lastWorkPeriod": 2,
+           | "lastWorkPeriod": "2",
            | "birthDate": "21.01.1999"
         }
       """.stripMargin
 
     jsonString.jsonAs[LoanOrderReaderEvent.V1] shouldBe Right(
       LoanOrderReaderEvent.V1(
-        id = 1,
+        id = UUID.fromString("89a6171a-0521-4cdc-bbe7-08706973f944"),
         userId = UUID.fromString("89a6171a-0521-4cdc-bbe7-08706973f944"),
         term = 20,
-        children = 2,
-        amount = 100000.0,
-        averageMoney = 100000.0,
+        children = "2",
+        amount = "100000",
+        averageMoney = 100000,
         workPeriod = 5,
-        lastWorkPeriod = 2,
+        lastWorkPeriod = "2",
         birthDate = "21.01.1999"
       )
     )

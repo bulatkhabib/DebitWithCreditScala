@@ -18,7 +18,7 @@ trait OrderProcessingService[F[_]] {
 object OrderProcessingService {
   final private class Impl[F[_]: Monad: Sleep](loanStorage: LoanStorage[F]) extends OrderProcessingService[F] {
     override def processOrder(loan: LoanData): F[Boolean] =
-      if (loan.workPeriod > 2 && loan.lastWorkPeriod >= 1)
+      if (loan.workPeriod > 2 && loan.lastWorkPeriod.toInt >= 1)
         Sleep[F].sleep(100.milliseconds) >> loanStorage.updateStatus(
           LoanEntry(
             loanId = LoanEntry.LoanId(loan.id.id),
