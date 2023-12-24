@@ -13,6 +13,8 @@ import tofu.Handle
 import tofu.syntax.handle._
 import utils.kafka.{EventsHandler, HandleResult}
 
+import java.util.UUID
+
 class LoanOrderReaderV1[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error]](
     parser: LoanOrderReaderParser[F],
     service: OrderProcessingService[F]
@@ -28,13 +30,15 @@ class LoanOrderReaderV1[F[_]: Monad: Handle[*[_], Consumer.LoanOrderReader.Error
 
       loadEvents = events.map { event =>
         LoanData(
-          id = LoanData.LoanId(event.id),
+          id = LoanData.LoanId(UUID.randomUUID()),
           userId = LoanData.LoanUserId(event.userId),
           term = LoanData.Term(event.term),
           amount = LoanData.Amount(event.amount),
           averageMoney = LoanData.AverageMoney(event.averageMoney),
           workPeriod = event.workPeriod,
-          lastWorkPeriod = event.lastWorkPeriod
+          lastWorkPeriod = event.lastWorkPeriod,
+          submissionDate = "23.12.2023",
+          interestRate = "3"
         )
       }
 

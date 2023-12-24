@@ -11,12 +11,13 @@ import java.util.UUID
 
 object Domain {
   final case class LoanEntry(
-      loanId: LoanEntry.LoanId,
-      status: LoanStatus,
-      userId: LoanEntry.LoanUserId,
-      term: LoanEntry.Term,
-      amount: LoanEntry.Amount,
-      averageMoney: LoanEntry.AverageMoney
+       loanId: LoanEntry.LoanId,
+       status: LoanStatus,
+       userId: LoanEntry.LoanUserId,
+       term: LoanEntry.Term,
+       amount: LoanEntry.Amount,
+       submissionDate: String,
+       interestRate: String
   )
 
   object LoanEntry {
@@ -37,8 +38,8 @@ object Domain {
   }
 
   sealed abstract class LoanStatus(
-      val value: String
-  ) extends StringEnumEntry
+                                    val value: String
+                                  ) extends StringEnumEntry
 
   object LoanStatus extends StringEnum[LoanStatus] with StringDoobieEnum[LoanStatus] with StringTethysEnum[LoanStatus] {
     case object Pending extends LoanStatus("PENDING")

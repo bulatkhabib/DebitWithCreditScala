@@ -21,7 +21,7 @@ lazy val `worker` = (project in file("worker"))
   .settings(
     name := "worker",
     libraryDependencies ++= Worker.dependencies,
-    dependencyOverrides ++= Worker.overridingDependencies,
+    dependencyOverrides ++= Worker.overridingDependencies
   )
 
 lazy val `worker-root` =

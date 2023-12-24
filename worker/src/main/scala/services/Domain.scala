@@ -16,7 +16,9 @@ object Domain {
       amount: LoanData.Amount,
       averageMoney: LoanData.AverageMoney,
       workPeriod: Int,
-      lastWorkPeriod: String
+      lastWorkPeriod: String,
+      submissionDate: String,
+      interestRate: String
   )
 
   object LoanData {

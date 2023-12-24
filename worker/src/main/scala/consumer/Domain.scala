@@ -1,8 +1,10 @@
 package consumer
 
 import cats.syntax.semigroup._
+import db.Domain.{LoanEntry, LoanStatus}
 import derevo.derive
 import derevo.tethys.{tethysReader, tethysWriter}
+import services.Domain.LoanData
 import tethys.{JsonReader, JsonWriter}
 import tofu.logging.{DictLoggable, LogRenderer, Loggable}
 import tofu.{Errors => TofuErrors}
@@ -83,7 +85,7 @@ object Domain {
       object LoanOrderReaderEvent {
         @derive(tethysReader, tethysWriter)
         final case class V1(
-            id: UUID,
+            id: Option[UUID],
             userId: UUID,
             term: Int,
             children: String,
@@ -91,8 +93,42 @@ object Domain {
             averageMoney: Int,
             workPeriod: Int,
             lastWorkPeriod: String,
-            birthDate: String
+            birthDate: String,
+            submissionDate: Option[String],
+            status: Option[LoanStatus],
+            interestRate: Option[String]
         )
+
+//        private UUID id;
+//
+//        private UUID userId;
+//
+//        @NotNull
+//        private Integer term;
+//
+//        @NotBlank
+//        private String children;
+//
+//        @NotBlank
+//        private String amount;
+//
+//        @NotNull
+//        private Long averageMoney;
+//
+//        @NotNull
+//        private Integer workPeriod;
+//
+//        @NotNull
+//        private String lastWorkPeriod;
+//
+//        @NotNull
+//        private String birthDate;
+//
+//        private String submissionDate;
+//
+//        private Status status;
+//
+//        private Integer interestRate;
       }
 
       implicit lazy val uuidReader: JsonReader[UUID] = JsonReader.stringReader.map(UUID.fromString)

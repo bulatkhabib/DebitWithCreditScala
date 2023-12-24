@@ -26,7 +26,8 @@ object OrderProcessingService {
             userId = LoanEntry.LoanUserId(loan.userId.id),
             term = LoanEntry.Term(loan.term.term),
             amount = LoanEntry.Amount(loan.amount.amount),
-            averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+            submissionDate = "23.12.2023",
+            interestRate = loan.interestRate
           ),
           LoanStatus.Approved
         )
@@ -38,7 +39,8 @@ object OrderProcessingService {
             userId = LoanEntry.LoanUserId(loan.userId.id),
             term = LoanEntry.Term(loan.term.term),
             amount = LoanEntry.Amount(loan.amount.amount),
-            averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+            submissionDate = "23.12.2023",
+            interestRate = loan.interestRate
           ),
           LoanStatus.Declined
         )
@@ -51,7 +53,8 @@ object OrderProcessingService {
           userId = LoanEntry.LoanUserId(loan.userId.id),
           term = LoanEntry.Term(loan.term.term),
           amount = LoanEntry.Amount(loan.amount.amount),
-          averageMoney = LoanEntry.AverageMoney(loan.averageMoney.averageMoney)
+          submissionDate = "23.12.2023",
+          interestRate = loan.interestRate
         )
       )
   }

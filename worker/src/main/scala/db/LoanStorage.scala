@@ -21,20 +21,22 @@ object LoanStorage {
   private object DB extends LoanStorage[ConnectionIO] {
     override def create(loan: LoanEntry): ConnectionIO[Boolean] =
       sql"""
-            INSERT INTO loan_table(
+            INSERT INTO loan_application(
                 id,
-                status,
-                user_id,
-                term,
                 amount,
-                averageMoney
+                interest_rate,
+                status,
+                submission_date,
+                term,
+                user_id
             ) VALUES (
                 ${loan.loanId.id},
-                ${loan.status}
-                ${loan.userId.id},
-                ${loan.term.term},
                 ${loan.amount.amount},
-                ${loan.averageMoney.averageMoney}
+                ${loan.interestRate.toInt},
+                ${loan.status},
+                ${loan.submissionDate},
+                ${loan.term.term},
+                ${loan.userId.id}
             )
          """
         .update.run.map(_ > 0)
@@ -42,7 +44,7 @@ object LoanStorage {
     override def updateStatus(loan: LoanEntry, status: LoanStatus): ConnectionIO[Boolean] =
       sql"""
         UPDATE
-          loan_table
+          loan_application
         SET
           status = $status
         WHERE
